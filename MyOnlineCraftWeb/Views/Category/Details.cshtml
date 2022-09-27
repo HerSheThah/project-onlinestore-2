@@ -1,0 +1,22 @@
+﻿@model MyOnlineCraftWeb.Models.Category
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h4 class="pt-5">Category Details</h4>
+
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.categoryName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.categoryName)
+        </dd>
+    </dl>
+</div>
+<partial name="_backToList"></partial>
+

@@ -1,0 +1,73 @@
+﻿@model MyOnlineCraftWeb.Models.ViewModel.ProductVM
+
+
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+	<input asp-for="Product.productId" hidden />
+	<input asp-for="Product.imageURL" hidden />
+	<div class="row">
+		<div class="col-10">
+			<div class="border p-3 mt-4 row">
+		<div class="col-12 pb-2">
+			<h2 class="text-primary">Edit Product</h2>
+			<hr />
+		</div>
+		<div class="mb-3">
+			<label asp-for="Product.productName"></label>
+			<input asp-for="Product.productName" class="form-control" />
+			<span asp-validation-for="Product.productName" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Product.productDescription"></label>
+			<textarea asp-for="Product.productDescription" rows="3" class="form-control"></textarea>
+			<span asp-validation-for="Product.productDescription" class="text-danger"></span>
+		</div>
+		<div class="mb-3 col-6">
+			<label asp-for="Product.ActualPrice"></label>
+			<input asp-for="Product.ActualPrice" class="form-control" />
+			<span asp-validation-for="Product.ActualPrice" class="text-danger"></span>
+		</div>
+		<div class="mb-3 col-6">
+			<label asp-for="Product.DiscountPrice"></label>
+			<input asp-for="Product.DiscountPrice" class="form-control" />
+			<span asp-validation-for="Product.DiscountPrice" class="text-danger"></span>
+		</div>
+		
+		 <div class=" mb-3">
+		    <label asp-for="image"></label>
+			<input asp-for="image"  type="file"  class="form-control" />
+			
+
+            </div>
+		<div class="mb-3 col-6">
+			<label asp-for="Product.productCategoryId"></label>
+			<select asp-for="Product.productCategoryId" asp-items="@ViewBag.productCategoryId" class="form-select">
+				<option >--Select Category--</option>
+			</select>
+			<span asp-validation-for="Product.productCategoryId" class="text-danger"></span>
+		</div>
+
+		<div class="col-12">
+			
+				 <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+				<partial name="_backToList"></partial>
+            </div>
+			
+			
+		</div>
+
+	</div>
+		</div>
+		<div class="col-2 pt-4">
+			<img src="~/Images/@Model.Product.imageURL"
+			width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+		</div>
+	</div>
+
+</form>
+
+@section Scripts{
+	@{
+	<partial name="_ValidationScriptsPartial" />
+	}
+}

@@ -1,0 +1,61 @@
+﻿@model MyOnlineCraftWeb.Models.ViewModel.ProductVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create New Product</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Product.productName" class="control-label"></label>
+                <input asp-for="Product.productName" class="form-control" />
+                <span asp-validation-for="Product.productName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.productDescription" class="control-label"></label>
+                <input asp-for="Product.productDescription" class="form-control" />
+                <span asp-validation-for="Product.productDescription" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Product.ActualPrice" class="control-label"></label>
+                <input asp-for="Product.ActualPrice" class="form-control" />
+                <span asp-validation-for="Product.ActualPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.DiscountPrice" class="control-label"></label>
+                <input asp-for="Product.DiscountPrice" class="form-control" />
+                <span asp-validation-for="Product.DiscountPrice" class="text-danger"></span>
+            </div>
+            @*<div class="form-control">
+                <label asp-for="Product.imageURL" class="control-label"></label>
+                <input type="file" asp-for="Product.imageURL" class="form-control" required/>
+            </div>*@
+            <div class="form-control">
+                <label asp-for="image" class="control-label"></label>
+                <input type="file" asp-for="image" class="form-control" required/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.productCategoryId" class="control-label"></label>
+                <select asp-for="Product.productCategoryId" class ="form-control" asp-items="ViewBag.productCategoryId"><options>-- Select category --</options> </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<partial name="_backToList"></partial>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

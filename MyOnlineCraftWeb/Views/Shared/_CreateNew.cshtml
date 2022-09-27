@@ -1,0 +1,20 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h1 class=>All @ViewBag.heading</h1>
+            </div>
+            <div class="col-6 text-end">
+                <p>  <a aasp-controller="@ViewBag.controller" asp-action="Create" class="btn btn-secondary"> <i class="bi bi-plus-circle-dotted"></i> Create New</a>
+                </p>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,101 @@
+﻿@model IEnumerable<MyOnlineCraftWeb.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    ViewBag.heading = "Products";
+    ViewBag.controller = "Products";
+
+}
+
+
+<partial name="_Notification"></partial>
+<partial name="_CreateNew" view-data="ViewData">
+
+
+<table class="pt-3 table table-hover table-borderless table-striped">
+    <thead class="table-primary">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.productName)
+            </th>
+           @* <th>
+                @Html.DisplayNameFor(model => model.productDescription)
+            </th>
+            *@
+            <th>
+                @Html.DisplayNameFor(model => model.ActualPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiscountPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.imageURL)
+
+
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.productName)
+            </td>
+           @* <td>
+                @Html.DisplayFor(modelItem => item.productDescription)
+            </td>*@
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.ActualPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountPrice)
+            </td>
+            <td>
+                <img class="circular_image" src="~/Images/@item.imageURL" />
+            </td>
+            <style>
+                .circular_image {
+                          width: 100px;
+                          height: 100px;
+                          border-radius: 50%;
+                          overflow: hidden;
+                          background-color: blue;
+                          /* commented for demo
+                          float: left;
+                          margin-left: 125px;
+                          margin-top: 20px;
+                          */
+  
+                          /*for demo*/
+                          display:inline-block;
+                          vertical-align:middle;
+                        }
+                        .circular_image img{
+                          width:100%;
+                        }
+            </style>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.categoryName)
+            </td>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                         <td>
+
+                <a asp-action="Edit" asp-route-id="@item.productId" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a> 
+                @*<a asp-action="Details" asp-route-id="@item.productId" class="btn btn-info"><i class="bi bi-info-circle "></i></a> *@
+                <a asp-action="Delete" asp-route-id="@item.productId" class="btn btn-danger"><i class="bi bi-trash"></i></a> 
+
+            </td>
+                    }
+                   
+        </tr>
+}
+    </tbody>
+</table>
