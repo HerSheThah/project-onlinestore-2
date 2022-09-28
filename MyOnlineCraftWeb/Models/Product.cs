@@ -23,6 +23,7 @@ namespace MyOnlineCraftWeb.Models
        
         public int discountPercent { get; set; }
         public Double ActualPrice { get; set; }
+        [ValidateNever]
         public Double DiscountPrice { get; set; }
 
         [DisplayName("Image")]

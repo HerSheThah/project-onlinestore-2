@@ -1,9 +1,8 @@
-﻿@model MyOnlineCraftWeb.Models.ViewModel.ProductVM
+﻿@model MyOnlineCraftWeb.Models.Product
 
 
-<form method="post" asp-action="Edit" enctype="multipart/form-data">
-	<input asp-for="Product.productId" hidden />
-	<input asp-for="Product.imageURL" hidden />
+<form method="post" asp-action="Edit">
+	<input asp-for="productId" hidden />
 	<div class="row">
 		<div class="col-10">
 			<div class="border p-3 mt-4 row">
@@ -12,38 +11,37 @@
 			<hr />
 		</div>
 		<div class="mb-3">
-			<label asp-for="Product.productName"></label>
-			<input asp-for="Product.productName" class="form-control" />
-			<span asp-validation-for="Product.productName" class="text-danger"></span>
+			<label asp-for="productName"></label>
+			<input asp-for="productName" class="form-control" />
+			<span asp-validation-for="productName" class="text-danger"></span>
 		</div>
 		<div class="mb-3">
-			<label asp-for="Product.productDescription"></label>
-			<textarea asp-for="Product.productDescription" rows="3" class="form-control"></textarea>
-			<span asp-validation-for="Product.productDescription" class="text-danger"></span>
+			<label asp-for="productDescription"></label>
+			<textarea asp-for="productDescription" rows="3" class="form-control"></textarea>
+			<span asp-validation-for="productDescription" class="text-danger"></span>
 		</div>
 		<div class="mb-3 col-6">
-			<label asp-for="Product.ActualPrice"></label>
-			<input asp-for="Product.ActualPrice" class="form-control" />
-			<span asp-validation-for="Product.ActualPrice" class="text-danger"></span>
+			<label asp-for="ActualPrice"></label>
+			<input asp-for="ActualPrice" class="form-control" />
+			<span asp-validation-for="ActualPrice" class="text-danger"></span>
 		</div>
 		<div class="mb-3 col-6">
-			<label asp-for="Product.DiscountPrice"></label>
-			<input asp-for="Product.DiscountPrice" class="form-control" />
-			<span asp-validation-for="Product.DiscountPrice" class="text-danger"></span>
+			<label asp-for="DiscountPrice"></label>
+			<input asp-for="DiscountPrice" class="form-control" />
+			<span asp-validation-for="DiscountPrice" class="text-danger"></span>
 		</div>
 		
 		 <div class=" mb-3">
-		    <label asp-for="image"></label>
-			<input asp-for="image"  type="file"  class="form-control" />
-			
+		    <label asp-for="imageURL"></label>
+			<input asp-for="imageURL"  class="form-control" />
 
             </div>
 		<div class="mb-3 col-6">
-			<label asp-for="Product.productCategoryId"></label>
-			<select asp-for="Product.productCategoryId" asp-items="@ViewBag.productCategoryId" class="form-select">
+			<label asp-for="productCategoryId"></label>
+			<select asp-for="productCategoryId" asp-items="@ViewBag.productCategoryId" class="form-select">
 				<option >--Select Category--</option>
 			</select>
-			<span asp-validation-for="Product.productCategoryId" class="text-danger"></span>
+			<span asp-validation-for="productCategoryId" class="text-danger"></span>
 		</div>
 
 		<div class="col-12">
@@ -59,7 +57,7 @@
 	</div>
 		</div>
 		<div class="col-2 pt-4">
-			<img src="~/Images/@Model.Product.imageURL"
+			<img src="@Model.imageURL"
 			width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
 		</div>
 	</div>

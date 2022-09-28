@@ -22,6 +22,7 @@ namespace MyOnlineCraftWeb.Controllers
         {
             
             IEnumerable<Product> products = _context.Products.Include(x => x.Category).ToList();
+            
             return View(products);
         }
 

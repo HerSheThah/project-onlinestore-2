@@ -45,36 +45,35 @@ namespace MyOnlineCraftWeb.Controllers
       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ProductVM productVM)
+        public async Task<IActionResult> Create(Product product)
         {
-            string imgName = UploadFile(productVM);
-
-            Product product = GetProduct(productVM, imgName);
-
+            string getimageURL = UploadFile(product.imageURL);
+            
             if (ModelState.IsValid)
             {
+                product.imageURL = getimageURL;
+                product.discountPercent = CalculateDiscount(product.DiscountPrice, product.ActualPrice);
+
+
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["productCategoryId"] = new SelectList(_context.Categories, "catId", "categoryName", product.productCategoryId);
-            return View(productVM);
+            return View(product);
         }
 
-        private string UploadFile(ProductVM productVM)
+        private string UploadFile(string productimageURL)
         {
-            string filename = null;
-            if (productVM.image != null)
+            String imageDrive = productimageURL;
+            string imageString = "https://drive.google.com/uc?export=view&id=";
+            if (imageDrive != null)
             {
-                string uploadDir = Path.Combine(webHostEnvironment.WebRootPath, "Images");
-                filename = Guid.NewGuid().ToString() + "-" + productVM.image.FileName;
-                string filePath = Path.Combine(uploadDir, filename);
-                using (var filstream = new FileStream(filePath, FileMode.Create))
-                {
-                    productVM.image.CopyTo(filstream);
-                }
+                String[] imageSplit = imageDrive.Split("/");
+                var id= imageSplit[5];
+                imageString += id;
             }
-            return filename;
+            return imageString;
         }
 
         // GET: Products/Edit/5
@@ -92,31 +91,20 @@ namespace MyOnlineCraftWeb.Controllers
                 return NotFound();
             }
             ViewData["productCategoryId"] = new SelectList(_context.Categories, "catId", "categoryName", product.productCategoryId);
-            var productVM = new ProductVM
-            {
-                Product = product,
-            };
-            return View(productVM);
+            return View(product);
         }
 
         // POST: Products/Edit/5
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, ProductVM productVM)
+        public async Task<IActionResult> Edit(int id, Product product)
         {
 
-            if (id != productVM.Product.productId)
+            if (id == null)
             {
                 return NotFound();
             }
-            string imgName = productVM.Product.imageURL;
-            if (productVM.image != null)
-            {
-                imgName = UploadFile(productVM);
-            }
-            Product product = GetProduct(productVM, imgName);
-
             if (ModelState.IsValid)
             {
                 try
@@ -139,22 +127,7 @@ namespace MyOnlineCraftWeb.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["productCategoryId"] = new SelectList(_context.Categories, "catId", "categoryName", product.productCategoryId);
-            return View(productVM);
-        }
-
-        private static Product GetProduct(ProductVM productVM, string imgName)
-        {
-            return new Product
-            {
-                productId = productVM.Product.productId,
-                productName = productVM.Product.productName,
-                productDescription = productVM.Product.productDescription,
-                ActualPrice = productVM.Product.ActualPrice,
-                DiscountPrice = productVM.Product.DiscountPrice,
-                productCategoryId = productVM.Product.productCategoryId,
-                imageURL = imgName,
-                discountPercent = CalculateDiscount(productVM.Product.DiscountPrice, productVM.Product.ActualPrice)
-            };
+            return View(product);
         }
 
         private static int CalculateDiscount(double discountPrice, double actualPrice)

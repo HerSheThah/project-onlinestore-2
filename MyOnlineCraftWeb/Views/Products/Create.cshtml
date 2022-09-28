@@ -1,4 +1,4 @@
-﻿@model MyOnlineCraftWeb.Models.ViewModel.ProductVM
+﻿@model MyOnlineCraftWeb.Models.Product
 
 @{
     ViewData["Title"] = "Create";
@@ -9,41 +9,41 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
+        <form asp-action="Create" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="Product.productName" class="control-label"></label>
-                <input asp-for="Product.productName" class="form-control" />
-                <span asp-validation-for="Product.productName" class="text-danger"></span>
+                <label asp-for="productName" class="control-label"></label>
+                <input asp-for="productName" class="form-control" />
+                <span asp-validation-for="productName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Product.productDescription" class="control-label"></label>
-                <input asp-for="Product.productDescription" class="form-control" />
-                <span asp-validation-for="Product.productDescription" class="text-danger"></span>
+                <label asp-for="productDescription" class="control-label"></label>
+                <input asp-for="productDescription" class="form-control" />
+                <span asp-validation-for="productDescription" class="text-danger"></span>
             </div>
             
             <div class="form-group">
-                <label asp-for="Product.ActualPrice" class="control-label"></label>
-                <input asp-for="Product.ActualPrice" class="form-control" />
-                <span asp-validation-for="Product.ActualPrice" class="text-danger"></span>
+                <label asp-for="ActualPrice" class="control-label"></label>
+                <input asp-for="ActualPrice" class="form-control" />
+                <span asp-validation-for="ActualPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Product.DiscountPrice" class="control-label"></label>
-                <input asp-for="Product.DiscountPrice" class="form-control" />
-                <span asp-validation-for="Product.DiscountPrice" class="text-danger"></span>
+                <label asp-for="DiscountPrice" class="control-label"></label>
+                <input asp-for="DiscountPrice" class="form-control" />
+                <span asp-validation-for="DiscountPrice" class="text-danger"></span>
             </div>
             @*<div class="form-control">
                 <label asp-for="Product.imageURL" class="control-label"></label>
                 <input type="file" asp-for="Product.imageURL" class="form-control" required/>
             </div>*@
-            <div class="form-control">
-                <label asp-for="image" class="control-label"></label>
-                <input type="file" asp-for="image" class="form-control" required/>
+            <div class="form-group">
+                <label asp-for="imageURL" class="control-label"></label>
+                <input asp-for="imageURL" class="form-control" required/>
             </div>
             <div class="form-group">
-                <label asp-for="Product.productCategoryId" class="control-label"></label>
-                <select asp-for="Product.productCategoryId" class ="form-control" asp-items="ViewBag.productCategoryId"><options>-- Select category --</options> </select>
+                <label asp-for="productCategoryId" class="control-label"></label>
+                <select asp-for="productCategoryId" class ="form-control" asp-items="ViewBag.productCategoryId"><options>-- Select category --</options> </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

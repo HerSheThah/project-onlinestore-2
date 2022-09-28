@@ -3,8 +3,8 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Create</h1>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Customer")){
+    <h1>Create</h1>
 
 <h4>Shoppingcart</h4>
 <hr />
@@ -35,6 +35,8 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

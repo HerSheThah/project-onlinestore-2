@@ -9,7 +9,7 @@
 			<div class="row p-2">
 				<div class="col-12 p-1" style="border:1px solid #008cba; border-radius: 5px;">
 					<div class="card card-img-top">
-						<img height="350" src="~/Images/@product.imageURL" class="card-img-top rounded"/>
+						<img height="350" src="@product.imageURL" class="card-img-top rounded"/>
 
 						<div class="card-body">
 						<div class="pl-1">
@@ -27,11 +27,15 @@
 						</div>
 						
 					</div>
-					<div>
+
+
+					@if (User.Identity.IsAuthenticated && User.IsInRole("Customer")){
+						<div>
 						<a  asp-action="Details" class="btn btn-primary form-control" asp-route-productid="@product.productId">
 							Details
 						</a>
 					</div>
+					}
 				</div> 
 			</div>
 		</div>
